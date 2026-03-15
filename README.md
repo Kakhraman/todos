@@ -48,6 +48,10 @@ A modern, fast, and minimalist Single Page Application (SPA) for managing todos.
 - **Frontend:** Vanilla JS, Bootstrap v5, Bootstrap Icons
 - **Storage:** JSON File System
 
+## 👤 Author
+
+Kakhramon Bekchanov
+
 ## 📝 License
 
 This project is open-source and available under the [MIT License](LICENSE).
