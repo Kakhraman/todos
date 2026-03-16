@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1773689545514,
+    "name": "Kakhramon",
+    "email": "abc@abc.abc",
+    "bio": "sdfgh",
+    "password": "$2b$10$keLEXBpZjUJgwlpt0OKl.OzelkBcftcDTVPGyzmcnC0NVvlm8fU6y",
+    "created_at": "2026-03-16T19:32:25.514Z"
+  },
+  {
+    "id": 1773689639678,
+    "name": "Kakhramon",
+    "email": "abc@abc.abcd",
+    "bio": "sdfgh",
+    "password": "$2b$10$vKRwWeZAem7dZACRFRI2eu7IY/i9MeLimJalbj4TU/3e4nEnlx2sG",
+    "created_at": "2026-03-16T19:33:59.678Z"
+  }
+]

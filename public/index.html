@@ -3,113 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minimalist Todo</title>
+  <title>Minimalist Todo - Auth</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
-    }
-    .container {
-      max-width: 800px;
-      margin-top: 50px;
-      padding-bottom: 100px;
-    }
-    .card {
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-    .btn-primary {
-      background-color: #000;
-      border: none;
-    }
-    .btn-primary:hover {
-      background-color: #222;
-    }
-    .todo-item {
-      transition: all 0.2s;
-      cursor: pointer;
-      border: none;
-      border-bottom: 1px solid #eee !important;
-    }
-    .todo-item:hover {
-      background-color: #f8f9fa;
-    }
-    .completed-text {
-      text-decoration: line-through;
-      color: #adb5bd;
-    }
-    .pagination .page-link {
-      color: #333;
-      border: none;
-      margin: 0 5px;
-      border-radius: 5px;
-    }
-    .pagination .active .page-link {
-      background-color: #000;
-      color: #fff;
-    }
-    .toggle-btn {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      border: 2px solid #ccc;
-      background: #fff;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      flex-shrink: 0;
-    }
-    .toggle-btn:hover {
-      border-color: #000;
-      transform: scale(1.1);
-    }
-    .toggle-btn.completed {
-      background-color: #000;
-      border-color: #000;
-      color: #fff;
-    }
-    .modal-content {
-      border-radius: 15px;
-      border: none;
-    }
-    .text-wrap-all {
-      word-break: break-all;
-      white-space: normal;
-    }
-    .action-btn {
-      width: 35px;
-      height: 35px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      transition: all 0.2s;
-    }
-    .action-btn:hover {
-      background-color: #e9ecef;
-    }
-    .spec-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #adb5bd;
-      letter-spacing: 0.05em;
-    }
+    body { font-family: 'Inter', sans-serif; background-color: #f8f9fa; color: #333; }
+    .container { max-width: 800px; margin-top: 50px; padding-bottom: 100px; }
+    .auth-container { max-width: 400px; margin: 100px auto; }
+    .card { border: none; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .btn-primary { background-color: #000; border: none; }
+    .btn-primary:hover { background-color: #222; }
+    .todo-item { transition: all 0.2s; cursor: pointer; border: none; border-bottom: 1px solid #eee !important; }
+    .todo-item:hover { background-color: #f8f9fa; }
+    .completed-text { text-decoration: line-through; color: #adb5bd; }
+    .pagination .page-link { color: #333; border: none; margin: 0 5px; border-radius: 5px; }
+    .pagination .active .page-link { background-color: #000; color: #fff; }
+    .toggle-btn { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #ccc; background: #fff; padding: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0; }
+    .toggle-btn.completed { background-color: #000; border-color: #000; color: #fff; }
+    .text-wrap-all { word-break: break-all; white-space: normal; }
+    .action-btn { width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px; transition: all 0.2s; }
+    .action-btn:hover { background-color: #e9ecef; }
+    .spec-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #adb5bd; letter-spacing: 0.05em; }
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="fw-semibold m-0">Todos</h1>
-    <span class="badge bg-dark rounded-pill" id="todo-count">0</span>
+<!-- Auth Section -->
+<div id="auth-section" class="auth-container">
+  <div class="card p-4">
+    <div id="login-form">
+      <h2 class="fw-bold mb-4 text-center">Sign In</h2>
+      <div class="mb-3">
+        <label class="form-label small fw-bold">Email</label>
+        <input type="email" id="login-email" class="form-control" placeholder="name@example.com">
+      </div>
+      <div class="mb-4">
+        <label class="form-label small fw-bold">Password</label>
+        <input type="password" id="login-pass" class="form-control" placeholder="••••••••">
+      </div>
+      <button onclick="login()" class="btn btn-primary w-100 mb-3">Login</button>
+      <div class="text-center small">
+        Don't have an account? <a href="#" onclick="toggleAuth(true)">Register Now</a>
+      </div>
+    </div>
+
+    <div id="register-form" class="hidden">
+      <h2 class="fw-bold mb-4 text-center">Create Account</h2>
+      <div class="mb-3">
+        <label class="form-label small fw-bold">Full Name</label>
+        <input type="text" id="reg-name" class="form-control" placeholder="Kakhramon Bekchanov">
+      </div>
+      <div class="mb-3">
+        <label class="form-label small fw-bold">Email</label>
+        <input type="email" id="reg-email" class="form-control" placeholder="name@example.com">
+      </div>
+      <div class="mb-3">
+        <label class="form-label small fw-bold">Bio</label>
+        <textarea id="reg-bio" class="form-control" placeholder="Tell us about yourself..."></textarea>
+      </div>
+      <div class="mb-4">
+        <label class="form-label small fw-bold">Password</label>
+        <input type="password" id="reg-pass" class="form-control" placeholder="••••••••">
+      </div>
+      <button onclick="register()" class="btn btn-primary w-100 mb-3">Register</button>
+      <div class="text-center small">
+        Already have an account? <a href="#" onclick="toggleAuth(false)">Back to Login</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main App Section -->
+<div id="app-section" class="container hidden">
+  <div class="d-flex justify-content-between align-items-start mb-4">
+    <div>
+      <h1 class="fw-semibold m-0">Todos</h1>
+      <div id="user-info" class="small text-muted mt-1"></div>
+    </div>
+    <div class="text-end">
+      <span class="badge bg-dark rounded-pill mb-2" id="todo-count">0</span><br>
+      <button onclick="logout()" class="btn btn-sm btn-outline-danger border-0">Logout <i class="bi bi-box-arrow-right"></i></button>
+    </div>
   </div>
 
   <div class="card mb-4">
@@ -125,7 +101,6 @@
           <button id="add-btn" class="btn btn-primary btn-lg w-100">Add</button>
         </div>
       </div>
-      <div class="mt-2 small text-muted">Press <kbd class="bg-secondary">Enter</kbd> to add task quickly</div>
     </div>
   </div>
 
@@ -140,23 +115,17 @@
     </div>
   </div>
 
-  <div id="todo-list" class="list-group shadow-sm bg-white rounded-3">
-    <!-- Todos will be loaded here -->
-  </div>
+  <div id="todo-list" class="list-group shadow-sm bg-white rounded-3"></div>
 
   <nav class="mt-4">
-    <ul id="pagination" class="pagination pagination-sm justify-content-center">
-      <!-- Pagination will be loaded here -->
-    </ul>
+    <ul id="pagination" class="pagination pagination-sm justify-content-center"></ul>
   </nav>
 </div>
 
-<!-- Dynamic Modal -->
+<!-- Modal -->
 <div class="modal fade" id="todoModal" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content shadow-lg" id="modal-content">
-      <!-- Content dynamically injected here -->
-    </div>
+    <div class="modal-content card shadow-lg" id="modal-content" style="border-radius: 15px; border: none;"></div>
   </div>
 </div>
 
@@ -166,20 +135,81 @@
   let currentFilter = 'all';
   let currentSearch = '';
   let allTodos = [];
+  let currentUser = null;
   const todoModal = new bootstrap.Modal(document.getElementById('todoModal'));
 
+  // Auth Functions
+  function toggleAuth(showReg) {
+    document.getElementById('login-form').classList.toggle('hidden', showReg);
+    document.getElementById('register-form').classList.toggle('hidden', !showReg);
+  }
+
+  async function checkAuth() {
+    const res = await fetch('/api/me');
+    if (res.ok) {
+      currentUser = await res.json();
+      showApp();
+    } else {
+      showAuth();
+    }
+  }
+
+  function showApp() {
+    document.getElementById('auth-section').classList.add('hidden');
+    document.getElementById('app-section').classList.remove('hidden');
+    document.getElementById('user-info').innerHTML = `Welcome, <strong>${currentUser.name}</strong><br>${currentUser.bio || ''}`;
+    fetchTodos();
+  }
+
+  function showAuth() {
+    document.getElementById('auth-section').classList.remove('hidden');
+    document.getElementById('app-section').classList.add('hidden');
+  }
+
+  async function login() {
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-pass').value;
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    if (res.ok) { currentUser = await res.json(); showApp(); }
+    else { alert((await res.json()).error); }
+  }
+
+  async function register() {
+    const data = {
+      name: document.getElementById('reg-name').value,
+      email: document.getElementById('reg-email').value,
+      bio: document.getElementById('reg-bio').value,
+      password: document.getElementById('reg-pass').value
+    };
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) { currentUser = await res.json(); showApp(); }
+    else { alert((await res.json()).error); }
+  }
+
+  async function logout() {
+    await fetch('/api/logout', { method: 'POST' });
+    currentUser = null;
+    showAuth();
+  }
+
+  // Todo Functions (Mostly same, with userId check)
   async function fetchTodos() {
     const url = `/api/todos?page=${currentPage}&filter=${currentFilter}&search=${encodeURIComponent(currentSearch)}`;
-    try {
-      const res = await fetch(url);
-      const data = await res.json();
-      allTodos = data.todos;
-      document.getElementById('todo-count').textContent = data.total;
-      renderTodos(data.todos);
-      renderPagination(data.totalPages);
-    } catch (err) {
-      console.error('Fetch error:', err);
-    }
+    const res = await fetch(url);
+    if (res.status === 401) return showAuth();
+    const data = await res.json();
+    allTodos = data.todos;
+    document.getElementById('todo-count').textContent = data.total;
+    renderTodos(data.todos);
+    renderPagination(data.totalPages);
   }
 
   function renderTodos(todos) {
@@ -188,14 +218,12 @@
       list.innerHTML = '<div class="list-group-item text-center text-muted p-5 border-0">No tasks found</div>';
       return;
     }
-    
     list.innerHTML = todos.map(todo => {
       const isCompleted = !!todo.completed_at;
       return `
         <div class="list-group-item todo-item d-flex justify-content-between align-items-center p-3" onclick="openDetails('${todo.id}')">
           <div class="d-flex align-items-center flex-grow-1 overflow-hidden">
-            <button class="toggle-btn me-3 ${isCompleted ? 'completed' : ''}" 
-                    onclick="event.stopPropagation(); toggleTodo('${todo.id}')">
+            <button class="toggle-btn me-3 ${isCompleted ? 'completed' : ''}" onclick="event.stopPropagation(); toggleTodo('${todo.id}')">
               ${isCompleted ? '<i class="bi bi-check-lg"></i>' : ''}
             </button>
             <div class="${isCompleted ? 'completed-text' : ''} text-wrap-all">
@@ -204,12 +232,8 @@
             </div>
           </div>
           <div class="d-flex gap-2 ms-3" onclick="event.stopPropagation()">
-            <button class="btn action-btn text-primary" onclick="openEdit('${todo.id}')" title="Edit">
-              <i class="bi bi-pencil-square"></i>
-            </button>
-            <button class="btn action-btn text-danger" onclick="deleteTodo('${todo.id}')" title="Delete">
-              <i class="bi bi-trash3"></i>
-            </button>
+            <button class="btn action-btn text-primary" onclick="openEdit('${todo.id}')"><i class="bi bi-pencil-square"></i></button>
+            <button class="btn action-btn text-danger" onclick="deleteTodo('${todo.id}')"><i class="bi bi-trash3"></i></button>
           </div>
         </div>
       `;
@@ -219,52 +243,21 @@
   function openDetails(id) {
     const todo = allTodos.find(t => String(t.id) === String(id));
     if (!todo) return;
-    
     const container = document.getElementById('modal-content');
     container.innerHTML = `
-      <div class="modal-header border-0 pb-0">
-        <h5 class="modal-title fw-bold">Task Specs</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+      <div class="modal-header border-0 pb-0"><h5 class="modal-title fw-bold">Task Specs</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
       <div class="modal-body p-4">
-        <div class="mb-4">
-          <h4 class="fw-bold mb-1">${todo.title}</h4>
-          <p class="text-muted text-wrap-all">${todo.description || 'No description provided.'}</p>
-        </div>
+        <div class="mb-4"><h4 class="fw-bold mb-1">${todo.title}</h4><p class="text-muted text-wrap-all">${todo.description || 'No description provided.'}</p></div>
         <div class="row g-3 border-top pt-3">
-          <div class="col-6">
-            <div class="spec-label">ID</div>
-            <div class="fw-semibold">#${todo.id}</div>
-          </div>
-          <div class="col-6">
-            <div class="spec-label">Status</div>
-            <span class="badge ${todo.completed_at ? 'bg-success' : 'bg-warning text-dark'}">${todo.completed_at ? 'Completed' : 'Active'}</span>
-          </div>
-          <div class="col-6">
-            <div class="spec-label">Created At</div>
-            <div class="small">${new Date(todo.created_at).toLocaleString()}</div>
-          </div>
-          <div class="col-6">
-            <div class="spec-label">Modified At</div>
-            <div class="small">${new Date(todo.modified_at).toLocaleString()}</div>
-          </div>
-          ${todo.completed_at ? `
-          <div class="col-12">
-            <div class="spec-label">Completed At</div>
-            <div class="small">${new Date(todo.completed_at).toLocaleString()}</div>
-          </div>` : ''}
+          <div class="col-6"><div class="spec-label">ID</div><div class="fw-semibold">#${todo.id}</div></div>
+          <div class="col-6"><div class="spec-label">Status</div><span class="badge ${todo.completed_at ? 'bg-success' : 'bg-warning text-dark'}">${todo.completed_at ? 'Completed' : 'Active'}</span></div>
+          <div class="col-6"><div class="spec-label">Created At</div><div class="small">${new Date(todo.created_at).toLocaleString()}</div></div>
+          <div class="col-6"><div class="spec-label">Modified At</div><div class="small">${new Date(todo.modified_at).toLocaleString()}</div></div>
         </div>
       </div>
       <div class="modal-footer border-0 pt-0 d-flex justify-content-between">
-        <button type="button" class="btn btn-outline-danger px-3" onclick="deleteInModal('${todo.id}')">
-          <i class="bi bi-trash3 me-1"></i> Delete
-        </button>
-        <div>
-          <button type="button" class="btn btn-light px-3 me-2" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-dark px-4" onclick="openEdit('${todo.id}')">
-            <i class="bi bi-pencil-square me-1"></i> Edit
-          </button>
-        </div>
+        <button type="button" class="btn btn-outline-danger px-3" onclick="deleteInModal('${todo.id}')"><i class="bi bi-trash3 me-1"></i> Delete</button>
+        <div><button type="button" class="btn btn-light px-3 me-2" data-bs-dismiss="modal">Close</button><button type="button" class="btn btn-dark px-4" onclick="openEdit('${todo.id}')"><i class="bi bi-pencil-square me-1"></i> Edit</button></div>
       </div>
     `;
     todoModal.show();
@@ -273,26 +266,16 @@
   function openEdit(id) {
     const todo = allTodos.find(t => String(t.id) === String(id));
     if (!todo) return;
-    
     const container = document.getElementById('modal-content');
     container.innerHTML = `
-      <div class="modal-header border-0 pb-0">
-        <h5 class="modal-title fw-bold">Edit Task</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+      <div class="modal-header border-0 pb-0"><h5 class="modal-title fw-bold">Edit Task</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
       <div class="modal-body p-4">
-        <div class="mb-3">
-          <label class="spec-label mb-1">Title</label>
-          <input type="text" id="edit-title" class="form-control bg-light border-0" value="${todo.title}">
-        </div>
-        <div class="mb-3">
-          <label class="spec-label mb-1">Description</label>
-          <textarea id="edit-desc" class="form-control bg-light border-0" rows="3">${todo.description || ''}</textarea>
-        </div>
+        <div class="mb-3"><label class="spec-label mb-1">Title</label><input type="text" id="edit-title" class="form-control bg-light border-0" value="${todo.title}"></div>
+        <div class="mb-3"><label class="spec-label mb-1">Description</label><textarea id="edit-desc" class="form-control bg-light border-0" rows="3">${todo.description || ''}</textarea></div>
       </div>
       <div class="modal-footer border-0 pt-0">
-        <button type="button" class="btn btn-light px-4" onclick="openDetails('${todo.id}')">Back to Specs</button>
-        <button type="button" class="btn btn-dark px-4" onclick="saveEdit('${todo.id}')">Save Changes</button>
+        <button type="button" class="btn btn-light px-4" onclick="openDetails('${todo.id}')">Back</button>
+        <button type="button" class="btn btn-dark px-4" onclick="saveEdit('${todo.id}')">Save</button>
       </div>
     `;
     if (!todoModal._isShown) todoModal.show();
@@ -301,87 +284,36 @@
   async function saveEdit(id) {
     const title = document.getElementById('edit-title').value.trim();
     const description = document.getElementById('edit-desc').value.trim();
-    
-    if (!title) return alert('Title cannot be empty');
-
-    try {
-      await fetch('/api/todos/' + id, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, description })
-      });
-      todoModal.hide();
-      fetchTodos();
-    } catch (err) {
-      console.error('Error saving edit:', err);
-    }
+    if (!title) return alert('Title is required');
+    await fetch('/api/todos/' + id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title, description }) });
+    todoModal.hide(); fetchTodos();
   }
 
-  async function deleteInModal(id) {
-    if (confirm('Are you sure you want to delete this task?')) {
-      await deleteTodo(id);
-      todoModal.hide();
-    }
-  }
+  async function deleteInModal(id) { if (confirm('Delete this task?')) { await deleteTodo(id); todoModal.hide(); } }
 
   async function addTodo() {
     const titleEl = document.getElementById('todo-title');
     const descEl = document.getElementById('todo-desc');
     const title = titleEl.value.trim();
     if (!title) return;
-
-    try {
-      await fetch('/api/todos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, description: descEl.value.trim() })
-      });
-      titleEl.value = ''; descEl.value = '';
-      fetchTodos();
-    } catch (err) {
-      console.error('Error adding todo:', err);
-    }
+    await fetch('/api/todos', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title, description: descEl.value.trim() }) });
+    titleEl.value = ''; descEl.value = ''; fetchTodos();
   }
 
-  async function toggleTodo(id) {
-    try {
-      await fetch('/api/todos/' + id + '/toggle', { method: 'POST' });
-      fetchTodos();
-    } catch (err) {
-      console.error('Error toggling todo:', err);
-    }
+  async function toggleTodo(id) { await fetch('/api/todos/' + id + '/toggle', { method: 'POST' }); fetchTodos(); }
+  async function deleteTodo(id) { await fetch('/api/todos/' + id, { method: 'DELETE' }); fetchTodos(); }
+  function setPage(p, e) { if (event) event.preventDefault(); currentPage = p; fetchTodos(); }
+  function renderPagination(t) {
+    const p = document.getElementById('pagination');
+    if (t <= 1) { p.innerHTML = ''; return; }
+    let h = '';
+    for (let i = 1; i <= t; i++) h += `<li class="page-item ${i === currentPage ? 'active' : ''}"><a class="page-link shadow-sm" href="#" onclick="setPage(${i}, event)">${i}</a></li>`;
+    p.innerHTML = h;
   }
-
-  async function deleteTodo(id) {
-    try {
-      await fetch('/api/todos/' + id, { method: 'DELETE' });
-      fetchTodos();
-    } catch (err) {
-      console.error('Error deleting todo:', err);
-    }
-  }
-
-  function setPage(page, event) { 
-    if (event) event.preventDefault();
-    currentPage = page; 
-    fetchTodos(); 
-  }
-
-  function renderPagination(totalPages) {
-    const pagination = document.getElementById('pagination');
-    if (totalPages <= 1) { pagination.innerHTML = ''; return; }
-    
-    let html = '';
-    for (let i = 1; i <= totalPages; i++) {
-      html += `<li class="page-item ${i === currentPage ? 'active' : ''}"><a class="page-link shadow-sm" href="#" onclick="setPage(${i}, event)">${i}</a></li>`;
-    }
-    pagination.innerHTML = html;
-  }
-
-  function setFilter(filter, event) {
-    currentFilter = filter; currentPage = 1;
+  function setFilter(f, e) {
+    currentFilter = f; currentPage = 1;
     document.querySelectorAll('.btn-group button').forEach(b => b.classList.remove('active'));
-    if (event) event.target.classList.add('active');
+    if (e) e.target.classList.add('active');
     fetchTodos();
   }
 
@@ -390,8 +322,7 @@
   document.getElementById('todo-desc').addEventListener('keypress', e => e.key === 'Enter' && addTodo());
   document.getElementById('search-input').addEventListener('input', e => { currentSearch = e.target.value; currentPage = 1; fetchTodos(); });
 
-  fetchTodos();
+  checkAuth();
 </script>
-
 </body>
 </html>
